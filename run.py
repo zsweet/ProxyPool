@@ -4,8 +4,8 @@ from proxypool.schedule import Schedule
 def main():
 
     s = Schedule()
-    s.run()
-    app.run()
+    s.run()    # 启动后台代理服务
+    app.run('127.0.0.1','5555')  # 启动Flask
 
 
 

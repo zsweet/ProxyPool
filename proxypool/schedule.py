@@ -12,7 +12,9 @@ from proxypool.getter import FreeProxyGetter
 from proxypool.setting import *
 from asyncio import TimeoutError
 
-
+"""
+asynchronous tester to test proxies in proxy pool
+"""
 class ValidityTester(object):
     test_api = TEST_API
 
@@ -35,6 +37,7 @@ class ValidityTester(object):
                         proxy = proxy.decode('utf-8')
                     real_proxy = 'http://' + proxy
                     print('Testing', proxy)
+                    #test the proxy...
                     async with session.get(self.test_api, proxy=real_proxy, timeout=get_proxy_timeout) as response:
                         if response.status == 200:
                             self._conn.put(proxy)
@@ -57,7 +60,10 @@ class ValidityTester(object):
         except ValueError:
             print('Async Error')
 
-
+"""
+adder to run the proxy crawl model,
+adding proxy to the proxy pool while over the threshold
+"""
 class PoolAdder(object):
     """
     add proxy to pool
@@ -133,6 +139,7 @@ class Schedule(object):
     def run(self):
         print('Ip processing running')
         valid_process = Process(target=Schedule.valid_proxy)
+        print(valid_process)
         check_process = Process(target=Schedule.check_pool)
         valid_process.start()
         check_process.start()

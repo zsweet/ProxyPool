@@ -1,4 +1,5 @@
 import redis
+from pip import logger
 from proxypool.error import PoolEmptyError
 from proxypool.setting import HOST, PORT, PASSWORD
 
@@ -7,6 +8,7 @@ class RedisClient(object):
     def __init__(self, host=HOST, port=PORT):
         if PASSWORD:
             self._db = redis.Redis(host=host, port=port, password=PASSWORD)
+            print('密码连接！！！')
         else:
             self._db = redis.Redis(host=host, port=port)
 
@@ -49,4 +51,5 @@ class RedisClient(object):
 
 if __name__ == '__main__':
     conn = RedisClient()
-    print(conn.pop())
+    print(conn.flush())
+    #print(conn.pop())

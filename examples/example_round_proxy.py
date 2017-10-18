@@ -2,6 +2,7 @@ import requests
 from requests.exceptions import ProxyError,Timeout,ConnectionError,ChunkedEncodingError
 import time
 from fake_useragent import UserAgent
+
 ua = UserAgent()
 
 def get_proxy():
@@ -39,7 +40,7 @@ def main():
                 return count
                 break
             elif count>=10:
-                print('抓取网页失败')
+                print('尝试',count,'次后抓取网页失败')
                 break
 
         except (ChunkedEncodingError,ConnectionError,Timeout,UnboundLocalError,UnicodeError,ProxyError):
